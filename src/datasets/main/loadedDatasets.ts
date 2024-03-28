@@ -635,7 +635,7 @@ async function fillInFilteredIndex(
         const objectPath: string = key;
         const objectData: Record<string, any> = value;
 
-        //log.debug("Datasets: fillInFilteredIndex: Checking object", loaded, objectPath, JSON.stringify((objectData || {}).id));
+        //log.debug("Datasets: fillInFilteredIndex: Checking object", loaded * 2, objectPath, JSON.stringify((objectData || {}).id));
         //await new Promise((resolve) => setTimeout(resolve, 5));
 
         if (predicate(objectPath, objectData) === true) {
@@ -674,7 +674,7 @@ async function fillInFilteredIndex(
       objectCount: indexed,
     });
 
-    log.debug("Datasets: fillInFilteredIndex: Indexed vs. checked", indexed, loaded);
+    log.debug("Datasets: fillInFilteredIndex: Indexed vs. checked", indexed, loaded * 2);
 
     return true as const;
   })();
