@@ -576,7 +576,6 @@ async function fillInFilteredIndex(
   statusReporter: (index: IndexStatus) => void,
 ) {
   const defaultIndexDB = defaultIndex.dbHandle;
-  const filteredIndexKeyedDB = filteredIndex.dbHandle;
   const predicate = filteredIndex.predicate;
   const keyer = filteredIndex.keyer;
 
@@ -626,6 +625,7 @@ async function fillInFilteredIndex(
     let loaded: number = 0;
 
     // First pass: write items into a temporary DB that orders on read
+    const batch: { type: 'put', key: string, value: string }[] = [];
     for await (const data of defaultIndexDB.createReadStream()) {
       // TODO: [upstream] NodeJS.ReadableStream is poorly typed.
       const { key, value } = data as unknown as { key: string, value: Record<string, any> };
@@ -641,12 +641,22 @@ async function fillInFilteredIndex(
         if (predicate(objectPath, objectData) === true) {
           //log.debug("Datasets: fillInFilteredIndex: Checking object using keyer", keyer);
           const customKey = (keyer ? keyer(objectData) : null) ?? objectPath;
-          await filteredIndexKeyedDB.put(customKey, objectPath);
+          // If erroneous keyer implementation causes multiple objects to have the same key,
+          // we go with unique object path
+          const effectiveKey = batch.find(op => op.key === customKey)
+            ? objectPath
+            : customKey
+          batch.push({
+            type: 'put',
+            key: effectiveKey,
+            value: objectPath,
+          });
           indexed += 1;
         }
         loaded += 0.5;
       }
     }
+    await filteredIndex.dbHandle.batch(batch);
 
     await rebuildFilteredIndexSortedDB(
       filteredIndex,
