@@ -1262,7 +1262,10 @@ datasetQueue.oneAtATime(async function _updateDatasetIndexesIfNeeded (
 
 
 /** Drops and rebuilds filtered index sorted DB from its keyed DB. */
-async function rebuildFilteredIndexSortedDB(idx: Datasets.Util.FilteredIndex, onItem?: (obj: number) => void) {
+async function rebuildFilteredIndexSortedDB(
+  idx: Datasets.Util.FilteredIndex,
+  onItem?: (obj: number) => void,
+) {
   await idx.sortedDBHandle.clear();
   let position: number = 0;
   const batch = idx.sortedDBHandle.batch();
