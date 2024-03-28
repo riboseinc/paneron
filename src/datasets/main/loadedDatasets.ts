@@ -1265,16 +1265,18 @@ datasetQueue.oneAtATime(async function _updateDatasetIndexesIfNeeded (
 async function rebuildFilteredIndexSortedDB(idx: Datasets.Util.FilteredIndex, onItem?: (obj: number) => void) {
   await idx.sortedDBHandle.clear();
   let position: number = 0;
+  const batch = idx.sortedDBHandle.batch();
   for await (const data of idx.dbHandle.createReadStream()) {
     const { key, value } = data as unknown as { key: string, value: string };
     if (key !== INDEX_META_MARKER_DB_KEY) {
       //log.debug("Indexing sorted key", value);
-      await idx.sortedDBHandle.put(position, value);
+      batch.put(position, value);
 
       onItem?.(position);
       position += 1;
     }
   }
+  await batch.write();
 }
 
 
