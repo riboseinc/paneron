@@ -92,6 +92,7 @@ getPackageCode.main!.handle(async ({ id, version }) => {
   const w = await worker;
   const localPlugins = await w.listLocalPlugins();
   const localPath = localPlugins[id]?.localPath;
+  // For now, we only load new-style extensions if locally installed
   if (!localPath) {
     throw new Error("Extension is not locally installed");
   }
