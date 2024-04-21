@@ -31,7 +31,7 @@ const NODE_MODULES_PATH = process.env.NODE_ENV === 'production'
   ? `${__static}/../../app.asar.unpacked/node_modules`
   : `${__static}/../../node_modules`;
 
-const MATHJAX_PATH = `${NODE_MODULES_PATH}/mathjax/MathJax.js?config=AM_HTMLorMML`;
+const MATHJAX_PATH = `${NODE_MODULES_PATH}/mathjax/MathJax.js?config=TeX-MML-AM_CHTML-full`;
 
 const MATHJAX_PATH_WITH_PROTO = `file://${MATHJAX_PATH}`;
 
@@ -40,6 +40,10 @@ const MATHJAX_OPTS = {
     useMathMLspacing: true,
     delimiters: [["`","`"]],
     preview: "none",
+  },
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
   },
 } as const;
 
