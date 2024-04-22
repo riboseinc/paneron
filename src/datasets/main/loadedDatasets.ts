@@ -216,6 +216,12 @@ datasetQueue.oneAtATime(async function getOrCreateFilteredIndex ({
       predicate,
       keyer,
     );
+
+    filteredIndexUpdated.main!.trigger({
+      workingCopyPath: workDir,
+      datasetID,
+      indexID: filteredIndexID,
+    });
   }
 
   return { indexID: filteredIndexID };
