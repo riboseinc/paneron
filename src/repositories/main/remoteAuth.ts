@@ -2,7 +2,7 @@
 
 import log from 'electron-log';
 
-import { loadState, storeState, encryptionIsAvailable } from 'state/manage';
+import { loadState, storeState, resetState, encryptionIsAvailable } from 'state/manage';
 
 
 /**
@@ -51,6 +51,9 @@ export async function getAuth(
  * if the user doesn’t specify a password for this specific remote,
  * but uses the same password for the domain.
  *
+ * If empty string is given as password, auth is reset for remote
+ * (but not for hostname).
+ *
  * May throw if decryption facilities are not available.
  */
 export async function saveAuth(remote: string, username: string, password: string) {
@@ -58,17 +61,27 @@ export async function saveAuth(remote: string, username: string, password: strin
     throw new Error("safeStorage API is not available on this systen");
   }
 
-  const hostname = getHostname(remote);
+  const remoteKey = getStateKey(remote, username);
 
-  const key = hostname
-    ? getStateKey(hostname, username)
-    : getStateKey(remote, username);
+  if (password !== '') {
+    const hostname = getHostname(remote);
 
-  await storeState(
-    key,
-    { password },
-    { encrypted: true },
-  );
+    if (hostname) {
+      await storeState(
+        getStateKey(hostname, username),
+        { password },
+        { encrypted: true },
+      );
+    }
+    await storeState(
+      getStateKey(remote, username),
+      { password },
+      { encrypted: true },
+    );
+
+  } else {
+    await resetState(remoteKey);
+  }
 }
 
 
