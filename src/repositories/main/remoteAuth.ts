@@ -60,15 +60,12 @@ export async function saveAuth(remote: string, username: string, password: strin
 
   const hostname = getHostname(remote);
 
-  if (hostname) {
-    await storeState(
-      getStateKey(hostname, username),
-      { password },
-      { encrypted: true },
-    );
-  }
+  const key = hostname
+    ? getStateKey(hostname, username)
+    : getStateKey(remote, username);
+
   await storeState(
-    getStateKey(remote, username),
+    key,
     { password },
     { encrypted: true },
   );
