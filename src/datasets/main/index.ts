@@ -193,8 +193,8 @@ initializeDataset.main!.handle(async ({ workingCopyPath, meta: datasetMeta, data
 const INDEX_DB_ROOT = nodePath.join(app.getPath('userData'), 'index-dbs');
 
 
-export async function clearIndexes() {
-  removeSync(INDEX_DB_ROOT);
+function clearIndexes() {
+  return removeSync(INDEX_DB_ROOT);
 }
 
 
