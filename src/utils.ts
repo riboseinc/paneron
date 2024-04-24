@@ -48,8 +48,14 @@ export function makeQueue() {
       return async function runQueued(...args) {
         // Which queues do we want to occupy/which locks do we want to acquire?
         const queueIDs = occupyQueues(...args);
+        //console.debug("Acquiring lock for queues to perform task", fn.name, args.toString(), queueIDs);
         // Acquire locks and run the function.
-        return await lock.acquire(queueIDs, () => fn(...args));
+        return await lock.acquire(queueIDs, async function performTask () {
+          //console.debug("Acquired lock for queues, performing task", fn.name, args.toString(), queueIDs);
+          const result = await fn(...args)
+          //console.debug("Done with task for queues", fn.name, args.toString(), queueIDs);
+          return result;
+        });
       }
     },
   };
