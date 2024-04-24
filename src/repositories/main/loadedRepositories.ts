@@ -1,6 +1,5 @@
 import fs from 'fs-extra';
 import { Subscription } from 'observable-fns';
-import { app } from 'electron';
 import log from 'electron-log';
 
 import type { PathChanges } from '@riboseinc/paneron-extension-kit/types/changes';

@@ -1,5 +1,4 @@
 import { spawn, Worker, Thread } from 'threads';
-import { app } from 'electron';
 import log from 'electron-log';
 import type WorkerMethods from '../worker/types';
 import type { WorkerSpec } from '../worker/index';
