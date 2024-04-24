@@ -1,11 +1,11 @@
-import { AbstractIterator } from 'abstract-leveldown';
-import { LevelUp } from 'levelup';
-import EncodingDown from 'encoding-down';
-import { BufferChangeset } from '@riboseinc/paneron-extension-kit/types/buffers';
-import { CommitOutcome, PathChanges } from '@riboseinc/paneron-extension-kit/types/changes';
-import { IndexStatus } from '@riboseinc/paneron-extension-kit/types/indexes';
-import { ObjectDataset } from '@riboseinc/paneron-extension-kit/types/objects';
-import { AuthoringGitOperationParams, CommitRequestMessage, DatasetOperationParams, TreeUpdateCommitRequestMessage } from 'repositories/types';
+import type { AbstractIterator } from 'abstract-leveldown';
+import type { LevelUp } from 'levelup';
+import type EncodingDown from 'encoding-down';
+import type { BufferChangeset } from '@riboseinc/paneron-extension-kit/types/buffers';
+import type { CommitOutcome, PathChanges } from '@riboseinc/paneron-extension-kit/types/changes';
+import type { IndexStatus } from '@riboseinc/paneron-extension-kit/types/indexes';
+import type { ObjectDataset } from '@riboseinc/paneron-extension-kit/types/objects';
+import type { AuthoringGitOperationParams, CommitRequestMessage, DatasetOperationParams, TreeUpdateCommitRequestMessage } from 'repositories/types';
 
 
 export type ReturnsPromise<F extends (...opts: any[]) => any> =
