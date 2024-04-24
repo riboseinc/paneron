@@ -62,7 +62,7 @@ export namespace API {
       (msg: DatasetOperationParams) => Promise<void>
 
     export type UnloadAll =
-      (msg: GitOperationParams) => Promise<void>
+      (msg: { workDir?: string }) => Promise<void>
   }
 
 

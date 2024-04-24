@@ -102,10 +102,18 @@ const unloadAll: Datasets.Lifecycle.UnloadAll =
 datasetQueue.oneAtATime(async function unloadAllDatasets ({
   workDir,
 }) {
-  for (const datasetID of Object.keys(datasets[workDir] ?? {})) {
-    await unloadDatasetDirect(workDir, datasetID);
+  if (!workDir) {
+    for (const [workDir, workdirDatasets] of Object.entries(datasets)) {
+      for (const datasetID of Object.keys(workdirDatasets)) {
+        await unloadDatasetDirect(workDir, datasetID);
+      }
+    }
+  } else {
+    for (const datasetID of Object.keys(datasets[workDir] ?? {})) {
+      await unloadDatasetDirect(workDir, datasetID);
+    }
   }
-}, ({ workDir }) => [workDir]);
+}, ({ workDir }) => [workDir ?? '']);
 
 
 /** Unloads given dataset without locking, does not throw but logs. */
