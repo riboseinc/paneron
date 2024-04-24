@@ -5,7 +5,7 @@ import { BufferChangeset } from '@riboseinc/paneron-extension-kit/types/buffers'
 import { CommitOutcome, PathChanges } from '@riboseinc/paneron-extension-kit/types/changes';
 import { IndexStatus } from '@riboseinc/paneron-extension-kit/types/indexes';
 import { ObjectDataset } from '@riboseinc/paneron-extension-kit/types/objects';
-import { AuthoringGitOperationParams, CommitRequestMessage, DatasetOperationParams, GitOperationParams, TreeUpdateCommitRequestMessage } from 'repositories/types';
+import { AuthoringGitOperationParams, CommitRequestMessage, DatasetOperationParams, TreeUpdateCommitRequestMessage } from 'repositories/types';
 
 
 export type ReturnsPromise<F extends (...opts: any[]) => any> =
