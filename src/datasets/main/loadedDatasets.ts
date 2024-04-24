@@ -718,20 +718,24 @@ const initFilteredIndex = datasetQueue.oneAtATime(async function initFilteredInd
   const dbPath = getDBPath(cacheRoot, `${workDir}/${datasetID}/${indexID}`);
   const sortedDBPath = getDBPath(cacheRoot, `${workDir}/${datasetID}/${indexID}-sorted`);
 
+  const indexStub = makeIdxStub(dbPath, {
+    keyEncoding: 'string',
+    valueEncoding: 'string',
+  });
+
+  const sortedDBHandle = levelup(encode(leveldown(sortedDBPath), {
+    keyEncoding: {
+      type: 'lexicographic-integer',
+      encode: (n) => lexint.pack(n, 'hex'),
+      decode: lexint.unpack,
+      buffer: false,
+    },
+    valueEncoding: 'string',
+  }));
+
   const idx: Datasets.Util.FilteredIndex = {
-    ...makeIdxStub(dbPath, {
-      keyEncoding: 'string',
-      valueEncoding: 'string',
-    }),
-    sortedDBHandle: levelup(encode(leveldown(sortedDBPath), {
-      keyEncoding: {
-        type: 'lexicographic-integer',
-        encode: (n) => lexint.pack(n, 'hex'),
-        decode: lexint.unpack,
-        buffer: false,
-      },
-      valueEncoding: 'string',
-    })),
+    ...indexStub,
+    sortedDBHandle,
     accessed: new Date(),
     predicate,
     keyer,
