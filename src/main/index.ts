@@ -28,7 +28,7 @@ import '../datasets/main';
 import '../clipboard/main';
 import '../subprocesses/main';
 
-import { clearDataAndRestart, ClearOption, getAppVersion, getColorScheme, colorSchemeUpdated, openExternalURL, refreshMainWindow, saveFileToFilesystem, selectDirectoryPath } from '../common';
+import { clearDataAndRestart, type ClearOption, getAppVersion, getColorScheme, colorSchemeUpdated, openExternalURL, refreshMainWindow, saveFileToFilesystem, selectDirectoryPath } from '../common';
 import { chooseFileFromFilesystem, makeRandomID } from '../common';
 
 import type { WindowOpenerParams } from '../window/types';
