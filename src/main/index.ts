@@ -35,7 +35,7 @@ import type { WindowOpenerParams } from '../window/types';
 import { resetStateGlobal } from '../state/manage';
 import { clearPluginData } from '../plugins/main';
 import { clearRepoConfig, clearRepoData } from '../repositories/main/readRepoConfig';
-import { clearIndexes } from '../datasets/main';
+// import { clearIndexes } from '../datasets/main';
 import { refreshByID, open as openWindow } from '../window/main';
 
 import { getEffectiveColorSchemeName } from './colorScheme';
@@ -67,9 +67,9 @@ const CLEAR_OPTION_ROUTINES: Record<ClearOption, () => Promise<void>> = {
   'ui-state': async () => {
     await resetStateGlobal();
   },
-  'db-indexes': async () => {
-    await clearIndexes();
-  },
+  //'db-indexes': async () => {
+  //  clearIndexes();
+  //},
   plugins: async () => {
     await clearPluginData();
   },

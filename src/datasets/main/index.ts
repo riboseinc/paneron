@@ -197,6 +197,8 @@ function clearIndexes() {
   return removeSync(INDEX_DB_ROOT);
 }
 
+clearIndexes();
+
 
 listRecentlyOpenedDatasets.main!.handle(async () => {
   return {

@@ -11,7 +11,7 @@ import { type EmptyPayload, makeEndpoint, _ } from './ipc';
 
 export const CLEAR_OPTIONS = [
   'ui-state',
-  'db-indexes',
+  //'db-indexes',
   'plugins',
   //'settings',
   'repositories',

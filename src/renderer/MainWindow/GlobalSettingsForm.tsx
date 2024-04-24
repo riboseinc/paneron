@@ -28,10 +28,10 @@ const CLEAR_OPTION_INFO: Record<ClearOption, { label: JSX.Element, description?:
     label: <>UI state and settings</>,
     description: <>The state of application interface (such as what’s selected and which sidebar blocks are collapsed).</>,
   },
-  'db-indexes': {
-    label: <>index DBs</>,
-    description: <>Indexed data caches. They will be auto-rebuilt on next use.</>,
-  },
+  //'db-indexes': {
+  //  label: <>index DBs</>,
+  //  description: <>Indexed data caches. They will be auto-rebuilt on next use.</>,
+  //},
   plugins: {
     label: <>extensions</>,
     description: <>Information about installed extensions, as well as extensions themselves. They will be reinstalled afterwords as you need them.</>,
@@ -99,7 +99,7 @@ export const GlobalSettingsForm: React.FC<{ className?: string; }> = function ({
   useState<Record<typeof CLEAR_OPTIONS[number], boolean>>({
     plugins: false,
     //settings: false,
-    'db-indexes': false,
+    //'db-indexes': false,
     'ui-state': false,
     repositories: false,
   });
