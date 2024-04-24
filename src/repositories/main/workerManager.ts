@@ -97,7 +97,7 @@ export function getRepoWorkers(
 }
 
 
-app.on('quit', terminateAllWorkers);
+//app.on('quit', terminateAllWorkers);
 
 
 /**

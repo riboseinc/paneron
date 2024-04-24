@@ -204,7 +204,7 @@ export async function clearPluginData() {
 }
 
 clearLockfile();
-app.on('quit', clearLockfile);
+//app.on('quit', clearLockfile);
 
 
 
@@ -245,12 +245,11 @@ export const worker: Promise<Thread & WorkerMethods> = new Promise((resolve, rej
   then((worker) => {
     log.debug("Plugins: Spawning worker: Done");
 
-    async function terminateWorker() {
-      log.debug("Plugins: Terminating worker");
-      await Thread.terminate(worker);
-    }
-
-    app.on('quit', terminateWorker);
+    //async function terminateWorker() {
+    //  log.debug("Plugins: Terminating worker");
+    //  await Thread.terminate(worker);
+    //}
+    //app.on('quit', terminateWorker);
 
     Thread.events(worker).subscribe(evt => {
       if (evt.type === 'internalError') {

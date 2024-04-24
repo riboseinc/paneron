@@ -148,7 +148,7 @@ async function _loadRepository(workingCopyPath: string): Promise<RepoStatus> {
   // This will schedule itself forever, until repository is unloaded.
   syncRepoRepeatedly(workingCopyPath, undefined, workers);
 
-  app.on('quit', () => { unloadRepository(workingCopyPath); });
+  //app.on('quit', () => { unloadRepository(workingCopyPath); });
 
   log.silly("Repositories: Load: Validating working directory", workingCopyPath);
 
@@ -405,11 +405,11 @@ async function reportBufferChanges(
 }
 
 
-app.on('quit', async () => {
-  for (const workingCopyPath of Object.keys(loadedRepositories)) {
-    await unloadRepository(workingCopyPath);
-  }
-});
+//app.on('quit', async () => {
+//  for (const workingCopyPath of Object.keys(loadedRepositories)) {
+//    await unloadRepository(workingCopyPath);
+//  }
+//});
 
 
 export default {
