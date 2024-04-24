@@ -41,12 +41,12 @@ function ({ repo }) {
   const canUnshare = hasRemote === true && !isBusy;
 
   async function _savePassword() {
-    if (hasRemote && (password ?? '').trim() !== '' && (url ?? '').trim() !== '') {
+    if (hasRemote) {
       await savePassword.renderer!.trigger({
         workingCopyPath: repo.workingCopyPath,
         remoteURL: url,
         username: username,
-        password,
+        password: password ?? '',
       });
       setEditingPassword(false);
       setPassword('');
@@ -70,7 +70,7 @@ function ({ repo }) {
           password,
         });
       } catch (e) {
-        throw new Error("Please check that this URL points to an empty repository, your username has push access, password (if needed) is correct, and your Internet connection is online.");
+        throw new Error("Please check that this URL points to an empty repository, your username has push access, password/token (if needed) is correct, and your Internet connection is online.");
       }
     }
   }
@@ -118,8 +118,10 @@ function ({ repo }) {
 
             {editingPassword
               ? <ButtonGroup>
-                  <Button small fill outlined disabled={isBusy || password === ''} onClick={performOperation('updating password', _savePassword)}>
-                    Save secret
+                  <Button small fill outlined disabled={isBusy} onClick={performOperation('updating password', _savePassword)}>
+                    {password !== ''
+                      ? 'Save secret'
+                      : 'Reset saved secret'}
                   </Button>
                   <Button small fill outlined disabled={isBusy} onClick={() => { setEditingPassword(false); setPassword(''); }}>
                     Don’t save
