@@ -169,34 +169,53 @@ datasetQueue.oneAtATime(async function getOrCreateFilteredIndex ({
 }) {
   const filteredIndexID = hash(queryExpression); // XXX
 
+  let idx: null | Datasets.Util.FilteredIndex;
+
   try {
 
-    const idx = getFilteredIndex(
+    idx = getFilteredIndex(
       workDir,
       datasetID,
       filteredIndexID,
     ) as Datasets.Util.FilteredIndex;
 
-    const commitHash = (await indexMeta(idx))?.commitHash;
-    if (commitHash) {
-      const defaultIndex = getDefaultIndex(workDir, datasetID);
-      if ((await indexMeta(defaultIndex))?.commitHash !== commitHash) {
-        throw new Error("Possibly stale filtered index found (commit hash differs from default index)");
-      }
-    } else {
-      throw new Error("Bad filtered index found (no commit hash)");
-    }
-
     //log.silly("Datasets: getOrCreateFilteredIndex: Already exists", queryExpression, filteredIndexID);
 
   } catch (e) {
+
+    idx = null;
 
     log.debug(
       "Datasets: getOrCreateFilteredIndex: No good index found for predicate query expression, creating new:",
       queryExpression,
       filteredIndexID,
       e);
+  }
 
+  let valid: boolean = false;
+
+  if (idx) {
+    const commitHash = (await indexMeta(idx))?.commitHash;
+    if (commitHash) {
+      const defaultIndex = getDefaultIndex(workDir, datasetID);
+      const defaultIndexHash = (await indexMeta(defaultIndex))?.commitHash;
+      valid = defaultIndexHash === commitHash;
+      if (!valid) {
+        log.debug("Possibly stale filtered index found (commit hash differs from default index)", commitHash, 'vs default', defaultIndexHash);
+      }
+    } else {
+      valid = false;
+      log.debug("Broken filtered index: missing commit hash");
+    }
+    if (!valid) {
+      await idx.dbHandle.clear();
+      await idx.dbHandle.close();
+      await idx.sortedDBHandle.clear();
+      await idx.sortedDBHandle.close();
+    }
+  }
+
+  if (!valid || !idx) {
     let predicate: Datasets.Util.FilteredIndexPredicate;
     try {
       predicate = new Function('objPath', 'obj', queryExpression) as Datasets.Util.FilteredIndexPredicate;
@@ -217,7 +236,7 @@ datasetQueue.oneAtATime(async function getOrCreateFilteredIndex ({
       keyer = undefined;
     }
 
-    await initFilteredIndex(
+    idx = await initFilteredIndex(
       workDir,
       datasetID,
       filteredIndexID,
@@ -759,6 +778,9 @@ const initFilteredIndex = datasetQueue.oneAtATime(async function initFilteredInd
   const statusReporter = getFilteredIndexStatusReporter(workDir, datasetID, indexID);
 
   await fillInFilteredIndex(getDefaultIndex(workDir, datasetID), idx, statusReporter);
+
+  return idx;
+
 }, (workDir, datasetID, indexID) => [
   // Lock for entire dataset
   `${workDir}:${datasetID}`,
