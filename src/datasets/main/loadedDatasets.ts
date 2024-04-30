@@ -1312,7 +1312,7 @@ async function rebuildFilteredIndexSortedDB(
   for await (const data of idx.dbHandle.createReadStream()) {
     const { key, value } = data as unknown as { key: string, value: string };
     if (key !== INDEX_META_MARKER_DB_KEY) {
-      //log.debug("Indexing sorted key", value);
+      //log.debug("Indexing sorted key", position, key, value);
       batch.put(position, value);
 
       onItem?.(position);
