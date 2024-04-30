@@ -1,4 +1,4 @@
-name: macos-latest
+name: macos-13
 
 on:
   workflow_dispatch:
@@ -20,7 +20,7 @@ on:
       - '**.nix'
       - 'flake.lock'
       - '.github/workflows/*.yml'
-      - '!.github/workflows/macos-latest.yml'
+      - '!.github/workflows/macos-13.yml'
       - '!.github/workflows/build-all.yml'
       - '!.github/workflows/test-dist.yml'
   pull_request:
@@ -44,13 +44,13 @@ jobs:
     uses: ./.github/workflows/build-all.yml
     secrets: inherit
     with:
-      os: macos-latest
+      os: macos-13
 
   test-dist:
     needs: [build-all]
     uses: ./.github/workflows/test-dist.yml
     with:
-      os: macos-latest
+      os: macos-13
 
   update-website:
     needs: [test-dist]

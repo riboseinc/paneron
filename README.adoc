@@ -3,7 +3,7 @@
 image:https://img.shields.io/badge/commitizen-friendly-brightgreen.svg[alt="Commitizen friendly",link="http://commitizen.github.io/cz-cli/"]
 image:https://github.com/paneron/paneron/actions/workflows/lint.yml/badge.svg[alt="Lint",link="https://github.com/paneron/paneron/actions/workflows/lint.yml"]
 
-image:https://github.com/paneron/paneron/actions/workflows/macos-latest.yml/badge.svg[alt="Build/release (macOS)",link="https://github.com/paneron/paneron/actions/workflows/macos-latest.yml"]
+image:https://github.com/paneron/paneron/actions/workflows/macos-13.yml/badge.svg[alt="Build/release (macOS)",link="https://github.com/paneron/paneron/actions/workflows/macos-13.yml"]
 image:https://github.com/paneron/paneron/actions/workflows/ubuntu-latest.yml/badge.svg[alt="Build/release (Ubuntu)",link="https://github.com/paneron/paneron/actions/workflows/ubuntu-latest.yml"]
 image:https://github.com/paneron/paneron/actions/workflows/windows-latest.yml/badge.svg[alt="Build/release (Windows)",link="https://github.com/paneron/paneron/actions/workflows/windows-latest.yml"]
 
