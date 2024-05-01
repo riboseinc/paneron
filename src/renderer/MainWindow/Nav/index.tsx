@@ -85,7 +85,11 @@ const Nav: React.FC<NavProps> = function ({ anchor, children, className }) {
         `}
         className={`${className ?? ''}`}>
       {breadcrumbs}
-      <div css={css`${anchor === 'start' ? css`position: absolute; right: ${padding};` : ''}`}>
+      <div css={css`
+          ${anchor === 'start'
+            ? css`position: absolute; right: ${padding};`
+            : ''}
+          `}>
         {children}
       </div>
     </div>
