@@ -35,6 +35,13 @@ html.platform--win32::before {
   background: rgba(0, 0, 0, .5);
 }
 
+.bp4-tag.bp4-interactive {
+  cursor: default !important;
+}
+.bp4-tag-remove {
+  cursor: default !important;
+}
+
 .bp4-input {
   /*
    * “middle”, specified by BP4, causes issues with inpout text <-> OL marker alignment.
