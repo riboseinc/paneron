@@ -30,7 +30,12 @@ const MainWindow: React.VoidFunctionComponent<Record<never, never>> = memo(funct
     return (
       <Frag>
         <ContextProvider>
-          <div css={css`position: absolute; inset: 0; box-sizing: border-box; overflow: hidden;`}>
+          <div css={css`
+                position: absolute;
+                inset: 0;
+                box-sizing: border-box;
+                overflow: hidden;
+              `}>
             <MainView
               css={css`
                 flex: 1;
