@@ -1,9 +1,3 @@
-body, html {
-  height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
-}
-
 #app {
   height: 100vh;
 }
@@ -28,63 +22,6 @@ html.platform--win32::before {
   background-color: silver;
 }
 
-.filter-popover .bp4-popover2-content {
-  border-radius: 0;
+body, html {
+  height: 100vh;
 }
-.bp4-overlay-backdrop.bp4-popover2-backdrop {
-  background: rgba(0, 0, 0, .5);
-}
-
-.bp4-tag.bp4-interactive {
-  cursor: default !important;
-}
-.bp4-tag-remove {
-  cursor: default !important;
-}
-
-.bp4-input {
-  /*
-   * “middle”, specified by BP4, causes issues with inpout text <-> OL marker alignment.
-   * This seems to have no side-effects.
-   */
-  vertical-align: unset;
-}
-.bp4-input:read-only {
-  box-shadow: inset silver 1px -1px;
-  background: none;
-}
-.bp4-dark .bp4-input:read-only {
-  box-shadow: inset rgba(255, 255, 255, 0.2) 1px -1px;
-}
-.bp4-tree-node-caret {
-  cursor: default !important;
-}
-
-.bp4-tree-node-content:hover {
-  background: unset;
-}
-
-.bp4-html-select select {
-  cursor: default !important;
-}
-
-.bp4-button {
-  cursor: default !important;
-
-}
-
-  .bp4-button:focus {
-    outline: none;
-  }
-
-.bp4-tab {
-  cursor: default !important;
-}
-
-.bp4-menu-item {
-  cursor: default;
-}
-
-  .bp4-menu-item, .bp4-menu .bp4-menu-item.bp4-disabled {
-    cursor: default !important;
-  }

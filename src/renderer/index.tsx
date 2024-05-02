@@ -12,10 +12,18 @@ import '!style-loader!css-loader!react-resizable/css/styles.css';
 import '!style-loader!css-loader!./normalize.css';
 import '!style-loader!css-loader!./renderer.css';
 
+import { BP4_RESET_CSS } from '@riboseinc/paneron-extension-kit/util';
+
 import ErrorBoundary from '@riboseinc/paneron-extension-kit/widgets/ErrorBoundary';
 import MainWindow from './MainWindow/index';
 
 import { openExternalURL, colorSchemeUpdated } from 'common';
+
+
+// FIXME: Not sustainable and can mess up CSP
+const style = document.createElement("style");
+style.textContent = BP4_RESET_CSS;
+document.head.appendChild(style);
 
 
 // Set color scheme
