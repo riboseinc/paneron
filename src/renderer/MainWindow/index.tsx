@@ -4,8 +4,9 @@
 import { jsx, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import React, { memo, useContext, useMemo } from 'react';
-import { Button, ButtonProps, Classes, Colors, NonIdealState } from '@blueprintjs/core';
+import { Classes, Colors, NonIdealState } from '@blueprintjs/core';
 import { INITIAL_GLOBAL_SETTINGS } from '@riboseinc/paneron-extension-kit/settings';
+import { NavbarButton } from '@riboseinc/paneron-extension-kit/widgets/Navbar2';
 
 import { getAppVersion, refreshMainWindow } from 'common';
 import { useSettings } from './settings';
@@ -95,22 +96,6 @@ memo(function ({ version, isPackaged }) {
     </Nav>
   );
 });
-
-
-const NavbarButton: React.FC<ButtonProps & { title?: string }> = function (props) {
-  return <Button
-    small
-    minimal
-    css={css`
-      transform: skew(45deg);
-      border-radius: 0;
-      .bp4-icon {
-        transform: scale(0.7);
-      }
-    `}
-    {...props}
-  />;
-}
 
 
 const MainView: React.FC<{ className?: string }> =
