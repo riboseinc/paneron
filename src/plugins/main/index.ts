@@ -22,7 +22,7 @@ import type { Extension, ExtensionRegistry, MaybeLocalExtension } from '../../pl
 import type { Methods as WorkerMethods, WorkerSpec } from './worker';
 
 
-const EXT_REGISTRY_ROOT = "https://extensions.paneron.org"
+const EXT_REGISTRY_ROOT = "https://extensions.paneron.org";
 
 
 const axios = _axios.create({ timeout: 6000 });
