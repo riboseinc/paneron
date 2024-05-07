@@ -266,12 +266,22 @@ export const GlobalSettingsForm: React.FC<{ className?: string; }> = function ({
       <SettingsFormSection title="Reset (for troubleshooting)">
         <div css={css`display: flex; flex-flow: column nowrap; align-items: flex-start; margin-bottom: 5px;`}>
           {CLEAR_OPTIONS.map(opt =>
-            <Tooltip2 minimal interactionKind="hover-target" position="bottom" content={<div css={css`width: 70vw`}>
-                <div>{CLEAR_OPTION_INFO[opt].description}</div>
-                {CLEAR_OPTION_INFO[opt].warning
-                  ? <div css={css`font-weight: strong`}>{CLEAR_OPTION_INFO[opt].warning}</div>
-                  : null}
-            </div>}>
+            <Tooltip2
+                minimal
+                key={opt}
+                interactionKind="hover-target"
+                position="bottom"
+                content={
+                  <div css={css`width: 70vw`}>
+                    <div>
+                      {CLEAR_OPTION_INFO[opt].description}
+                    </div>
+                    {CLEAR_OPTION_INFO[opt].warning
+                      ? <div css={css`font-weight: strong`}>
+                          {CLEAR_OPTION_INFO[opt].warning}
+                        </div>
+                      : null}
+                  </div>}>
               <Switch
                 css={css`margin: 0;`}
                 labelElement={<>Clear {CLEAR_OPTION_INFO[opt].label}</>}
