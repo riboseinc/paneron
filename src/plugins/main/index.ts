@@ -95,16 +95,20 @@ getPackageCode.main!.handle(async ({ id, version }) => {
   const w = await worker;
   const localPlugins = await w.listLocalPlugins();
   const localPath = localPlugins[id]?.localPath;
+
   // For now, we only load new-style extensions if locally installed
+  let code: string;
+
   if (!localPath) {
-    throw new Error("Extension is not locally installed");
+    const codeURI = `${EXT_REGISTRY_ROOT}/e/${id}/extension.js`;
+    log.debug("getPackageCode: getting code from URI", codeURI);
+    code = (await axios.get(codeURI)).data;
+    //throw new Error("Extension is not locally installed");
+  } else {
+    const builtFilePath = path.join(localPath, 'extension.js');
+    log.debug("getPackageCode: getting code from local file", builtFilePath);
+    code = await fs.readFile(builtFilePath, { encoding: 'utf-8' });
   }
-
-  const builtFilePath = path.join(localPath, 'extension.js');
-
-  log.debug("getPackageCode: getting code from", builtFilePath);
-
-  const code = await fs.readFile(builtFilePath, { encoding: 'utf-8' });
 
   return { code };
 });
