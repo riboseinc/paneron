@@ -96,10 +96,12 @@ getPackageCode.main!.handle(async ({ id, version }) => {
   const localPlugins = await w.listLocalPlugins();
   const localPath = localPlugins[id]?.localPath;
 
-  // For now, we only load new-style extensions if locally installed
   let code: string;
 
   if (!localPath) {
+    // FIXME: doesn’t work for non-local extensions somehow.
+    // (TypeError: Failed to resolve module specifier "@riboseinc/paneron-registry-kit/types",
+    // though this import doesn’t seem to appear in extension.js)
     const codeURI = `${EXT_REGISTRY_ROOT}/e/${id}/extension.js`;
     log.debug("getPackageCode: getting code from URI", codeURI);
     code = (await axios.get(codeURI)).data;
