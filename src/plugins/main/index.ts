@@ -22,6 +22,9 @@ import type { Extension, ExtensionRegistry, MaybeLocalExtension } from '../../pl
 import type { Methods as WorkerMethods, WorkerSpec } from './worker';
 
 
+const EXT_REGISTRY_ROOT = "https://extensions.paneron.org"
+
+
 const axios = _axios.create({ timeout: 6000 });
 axios.defaults.raxConfig = {
   instance: axios,
@@ -216,7 +219,7 @@ const publishedExtensions: ExtensionRegistry = {};
 async function fetchPublishedExtensions(ignoreCache?: true): Promise<ExtensionRegistry> {
   if (ignoreCache || Object.keys(publishedExtensions).length < 1) {
     try {
-      const ext = (await axios.get("https://extensions.paneron.org/extensions.json")).data.extensions;
+      const ext = (await axios.get(`${EXT_REGISTRY_ROOT}/extensions.json`)).data.extensions;
       Object.assign(publishedExtensions, ext);
     } catch (e) {
       log.error("Plugins: Unable to fetch published extensions", (e as any).message ?? 'unknown error');
