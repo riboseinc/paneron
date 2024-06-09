@@ -1032,6 +1032,13 @@
   resolved "https://registry.yarnpkg.com/@blueprintjs/colors/-/colors-4.1.21.tgz#622c56ac7f9af466680eafcdbaf26e5c9152ad3b"
   integrity sha512-5csitaTn1xyHktMRyXAcvWzsbrgtP9pK7ZmYX9f0TGjB1UG5zNaTGLexX0aFqop44SpfsSP5mbA8xGBniy8nZA==
 
+"@blueprintjs/colors@^4.2.1":
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@blueprintjs/colors/-/colors-4.2.1.tgz#603b2512caee84feddcb3dbd536534c140b9a1f3"
+  integrity sha512-Cx7J2YnUuxn+fi+y5XtXnBB7+cFHN4xBrRkaAetp78i3VTCXjUk+d1omrOr8TqbRucUXTdrhbZOUHpzRLFcJpQ==
+  dependencies:
+    tslib "~2.5.0"
+
 "@blueprintjs/core@^4.17.8", "@blueprintjs/core@~4.17.8":
   version "4.17.8"
   resolved "https://registry.yarnpkg.com/@blueprintjs/core/-/core-4.17.8.tgz#82d42f421c2e9daf3487943546e0613bb9f369fe"
@@ -1039,6 +1046,23 @@
   dependencies:
     "@blueprintjs/colors" "^4.1.21"
     "@blueprintjs/icons" "^4.14.5"
+    "@juggle/resize-observer" "^3.4.0"
+    "@types/dom4" "^2.0.2"
+    classnames "^2.3.1"
+    dom4 "^2.1.5"
+    normalize.css "^8.0.1"
+    popper.js "^1.16.1"
+    react-popper "^1.3.11"
+    react-transition-group "^4.4.5"
+    tslib "~2.5.0"
+
+"@blueprintjs/core@^4.20.2":
+  version "4.20.2"
+  resolved "https://registry.yarnpkg.com/@blueprintjs/core/-/core-4.20.2.tgz#ae1bbaf13bd1bf887b506760c478cc940f6d6e20"
+  integrity sha512-5v4Nr0jozfAjiOkjY4zvt1XSpt4ldnrSaxtwo506S2cxJYfwFeMTmDshXNPFcc8L1fjZMxi0IWI2WABXzZXS6w==
+  dependencies:
+    "@blueprintjs/colors" "^4.2.1"
+    "@blueprintjs/icons" "^4.16.0"
     "@juggle/resize-observer" "^3.4.0"
     "@types/dom4" "^2.0.2"
     classnames "^2.3.1"
@@ -1068,6 +1092,15 @@
     classnames "^2.3.1"
     tslib "~2.5.0"
 
+"@blueprintjs/icons@^4.16.0":
+  version "4.16.0"
+  resolved "https://registry.yarnpkg.com/@blueprintjs/icons/-/icons-4.16.0.tgz#47f9e8abe64d84fc18721080b8f191d8aac075d8"
+  integrity sha512-cyfgjUZcZCtQrXWUV8FwqYTFEzduV4a0N7yhOU38jY+cBRCLu/sDrD0Osvfk4DGRvNe4YjY7pohVLFSxpg68Uw==
+  dependencies:
+    change-case "^4.1.2"
+    classnames "^2.3.1"
+    tslib "~2.5.0"
+
 "@blueprintjs/popover2@^1.13.12", "@blueprintjs/popover2@~1.13.12":
   version "1.13.12"
   resolved "https://registry.yarnpkg.com/@blueprintjs/popover2/-/popover2-1.13.12.tgz#b8859954f93ce97e08445c62603bfc30cf4b0776"
@@ -1081,6 +1114,19 @@
     react-popper "^2.3.0"
     tslib "~2.5.0"
 
+"@blueprintjs/popover2@^1.14.11":
+  version "1.14.11"
+  resolved "https://registry.yarnpkg.com/@blueprintjs/popover2/-/popover2-1.14.11.tgz#0698fdeaf6710460cef0b71bed592ca37f40d1f9"
+  integrity sha512-5XAjeb2mlWjYXC0pqrNDLzHSsX85Zaiv8jixxUN9abarMUUFKGATgGF8MRsWTLAW94Gli6CB1lzVkrYkRHHf6Q==
+  dependencies:
+    "@blueprintjs/core" "^4.20.2"
+    "@juggle/resize-observer" "^3.4.0"
+    "@popperjs/core" "^2.11.7"
+    classnames "^2.3.1"
+    dom4 "^2.1.5"
+    react-popper "^2.3.0"
+    tslib "~2.5.0"
+
 "@blueprintjs/select@~4.9.12":
   version "4.9.12"
   resolved "https://registry.yarnpkg.com/@blueprintjs/select/-/select-4.9.12.tgz#8aa3a0d3611c42ec2e58aec97c92018ba8fe61e8"
@@ -1089,6 +1135,18 @@
     "@blueprintjs/core" "^4.17.8"
     "@blueprintjs/popover2" "^1.13.12"
     classnames "^2.3.1"
+    tslib "~2.5.0"
+
+"@blueprintjs/table@^4":
+  version "4.10.12"
+  resolved "https://registry.yarnpkg.com/@blueprintjs/table/-/table-4.10.12.tgz#17dc7aea00c07b38a77545fc73a463889280a146"
+  integrity sha512-f5NbjuHQ/1vb5hkT+WsCnjIU3Vp2OCWdyDUopVmgj4qHIgzgX38vP2sLS8aUFlbsEQr/xAU9mfkpp4FT+65mXA==
+  dependencies:
+    "@blueprintjs/core" "^4.20.2"
+    "@blueprintjs/popover2" "^1.14.11"
+    classnames "^2.3.1"
+    prop-types "^15.7.2"
+    react-innertext "^1.1.5"
     tslib "~2.5.0"
 
 "@chevrotain/cst-dts-gen@10.5.0":
@@ -1478,6 +1536,11 @@
   version "2.11.6"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
   integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
+
+"@popperjs/core@^2.11.7":
+  version "2.11.8"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
+  integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
 "@react-spring/animated@~9.7.2":
   version "9.7.2"
@@ -9680,6 +9743,11 @@ react-helmet@^6.1.0:
     prop-types "^15.7.2"
     react-fast-compare "^3.1.1"
     react-side-effect "^2.1.0"
+
+react-innertext@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/react-innertext/-/react-innertext-1.1.5.tgz#8147ac54db3f7067d95f49e2d2c05a720d27d8d0"
+  integrity sha512-PWAqdqhxhHIv80dT9znP2KvS+hfkbRovFp4zFYHFFlOoQLRiawIic81gKb3U1wEyJZgMwgs3JoLtwryASRWP3Q==
 
 react-is@^16.13.1, react-is@^16.6.3, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"

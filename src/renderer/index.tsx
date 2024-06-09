@@ -7,12 +7,16 @@ import '!style-loader!css-loader!@blueprintjs/datetime/lib/css/blueprint-datetim
 import '!style-loader!css-loader!jsondiffpatch/dist/formatters-styles/annotated.css';
 import '!style-loader!css-loader!jsondiffpatch/dist/formatters-styles/html.css';
 import '!style-loader!css-loader!@blueprintjs/core/lib/css/blueprint.css';
+import '!style-loader!css-loader!@blueprintjs/table/lib/css/table.css';
 import '!style-loader!css-loader!@blueprintjs/popover2/lib/css/blueprint-popover2.css';
 import '!style-loader!css-loader!react-resizable/css/styles.css';
 import '!style-loader!css-loader!./normalize.css';
 import '!style-loader!css-loader!./renderer.css';
 
 import { BP4_RESET_CSS } from '@riboseinc/paneron-extension-kit/util';
+
+
+import { HotkeysProvider } from '@blueprintjs/core';
 
 import ErrorBoundary from '@riboseinc/paneron-extension-kit/widgets/ErrorBoundary';
 import MainWindow from './MainWindow/index';
@@ -77,7 +81,9 @@ window.addEventListener('click', handleLinkClick);
 
 ReactDOM.render(
   <ErrorBoundary viewName="Main window">
-    <MainWindow />
+    <HotkeysProvider>
+      <MainWindow />
+    </HotkeysProvider>
   </ErrorBoundary>,
   containerEl);
 

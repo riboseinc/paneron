@@ -192,6 +192,7 @@
     "@blueprintjs/icons": "~4.14.5",
     "@blueprintjs/popover2": "~1.13.12",
     "@blueprintjs/select": "~4.9.12",
+    "@blueprintjs/table": "^4",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@paneron/libmmel": "~0.1.3",
