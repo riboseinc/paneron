@@ -1137,7 +1137,7 @@
     classnames "^2.3.1"
     tslib "~2.5.0"
 
-"@blueprintjs/table@^4":
+"@blueprintjs/table@~4.10.12":
   version "4.10.12"
   resolved "https://registry.yarnpkg.com/@blueprintjs/table/-/table-4.10.12.tgz#17dc7aea00c07b38a77545fc73a463889280a146"
   integrity sha512-f5NbjuHQ/1vb5hkT+WsCnjIU3Vp2OCWdyDUopVmgj4qHIgzgX38vP2sLS8aUFlbsEQr/xAU9mfkpp4FT+65mXA==
