@@ -1,7 +1,7 @@
 {
   "name": "paneron",
   "productName": "Paneron",
-  "version": "2.2.14",
+  "version": "2.2.15",
   "description": "Structured data editor and viewer",
   "bugs": "https://github.com/paneron/paneron/issues",
   "author": {
