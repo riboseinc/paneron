@@ -21,7 +21,7 @@ export async function getAuth(
   username: string,
 ): Promise<{ password: string | undefined; username: string; }> {
   if (!encryptionIsAvailable()) {
-    throw new Error("safeStorage API is not available on this systen");
+    throw new Error("safeStorage API is not available on this system");
   }
 
   let password = (await loadState(
@@ -58,7 +58,7 @@ export async function getAuth(
  */
 export async function saveAuth(remote: string, username: string, password: string) {
   if (!encryptionIsAvailable()) {
-    throw new Error("safeStorage API is not available on this systen");
+    throw new Error("safeStorage API is not available on this system");
   }
 
   const remoteKey = getStateKey(remote, username);
