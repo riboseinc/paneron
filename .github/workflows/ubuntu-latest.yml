@@ -60,3 +60,20 @@ jobs:
     if: ${{ startsWith(github.ref, 'refs/tags/v') }}
     uses: ./.github/workflows/update-website.yml
     secrets: inherit
+
+  publish-snapcraft:
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    needs: [test-dist]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist-ubuntu-latest
+          path: ./snap
+      - name: Push to snapcraft.io
+        env:
+          SNAPCRAFT_TOKEN: ${{ secrets.PANERON_SNAPCRAFT_TOKEN }}
+        run: |
+          echo "${SNAPCRAFT_TOKEN}" > .snapcraft_token
+          snapcraft login --with .snapcraft_token
+          snapcraft push --release=stable snap/*.snap
