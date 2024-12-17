@@ -33,9 +33,21 @@
         ];
         commands = [
           {
+            name = "dev";
+            command = "yarn dev \"$@\"";
+            help = "Serve the Electron instance";
+            category = "NPM";
+          }
+          {
             name = "build";
             command = "yarn build \"$@\"";
-            help = "Build the site";
+            help = "Build the package";
+            category = "NPM";
+          }
+          {
+            name = "pnpm";
+            command = "yarn \"$@\"";
+            help = "Run a command with yarn instead of pnpm, because muscle memory";
             category = "NPM";
           }
         ];
