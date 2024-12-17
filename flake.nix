@@ -1,7 +1,7 @@
 {
   description = "JS Dev Env";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/master";
     flake-utils.url = "github:numtide/flake-utils";
     devshell.url = "github:numtide/devshell/main";
     flake-compat = {
