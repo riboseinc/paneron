@@ -45,12 +45,12 @@ jobs:
 
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
       - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node }}
           cache: yarn
@@ -144,7 +144,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_PANERON_CI_TOKEN }}
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: dist-${{ inputs.os }}
@@ -153,7 +153,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload error logs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always() && env.has_notarization_error == 1
         with:
           name: error-logs-${{ inputs.os }}

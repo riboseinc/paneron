@@ -37,12 +37,12 @@ jobs:
 
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: ${{ vars.PANERON_DEFAULT_NODE_VERSION }}
           cache: yarn
 
       - run: yarn install --immutable
