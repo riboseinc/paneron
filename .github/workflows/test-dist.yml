@@ -10,7 +10,7 @@ on:
       node:
         required: false
         type: string
-        default: ${{ vars.DEFAULT_NODE_VERSION }}
+        default: ${{ vars.PANERON_DEFAULT_NODE_VERSION }}
       cache_dir:
         required: false
         type: string

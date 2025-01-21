@@ -58,7 +58,7 @@
           fzf
           gnused
           jq
-          nodejs_18
+          # nodejs_18 # NOTE: Use node 16 until webpack is upgraded to v5+?
           ripgrep
           wget
         ];
