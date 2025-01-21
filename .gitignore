@@ -1,3 +1,6 @@
+# Direnv
+.direnv
+
 /bin
 /node_modules
 /.npm
