@@ -165,10 +165,16 @@ export const RepoBreadcrumb: React.FC<{
   return (
     <Breadcrumb
       title={
-        repoInfo.paneronMeta?.title ??
-        repoInfo.gitMeta.workingCopyPath.slice(
-          repoInfo.gitMeta.workingCopyPath.length - 20,
-          repoInfo.gitMeta.workingCopyPath.length)}
+        (
+          repoInfo.paneronMeta?.title ??
+            repoInfo.gitMeta.workingCopyPath.slice(
+              repoInfo.gitMeta.workingCopyPath.length - 20,
+              repoInfo.gitMeta.workingCopyPath.length)
+        ) + (typeof repoInfo.gitMeta?.label === 'string'
+          ? ` (${repoInfo.gitMeta?.label})`
+          : ''
+        )
+      }
       icon={ICON_PROPS}
       onClose={onClose}
       onNavigate={onNavigate}
