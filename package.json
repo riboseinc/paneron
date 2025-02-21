@@ -26,7 +26,7 @@
     "dist:macos": "electron-builder --macos",
     "dist:linux": "electron-builder --linux",
     "fetch-dist-deps": "run-script-os",
-    "fetch-dist-deps:win32": "md bin\\win && cd bin\\win && curl.exe -fsSL -o metanorma \"https://github.com/metanorma/packed-mn/releases/latest/download/metanorma-windows-x86_64.exe\"",
+    "fetch-dist-deps:win32": "md bin\\win && cd bin\\win && curl.exe -fsSL -o metanorma \"https://github.com/metanorma/packed-mn/releases/download/%npm_package_metanorma_version%/metanorma-windows-x86_64.exe\"",
     "fetch-dist-deps:macos": "mkdir -p bin/mac && cd bin/mac && curl -fsSL \"https://github.com/metanorma/packed-mn/releases/download/${npm_package_metanorma_version}/metanorma-darwin-x86_64.tgz\" -O && find . -name \"*.tgz\" -exec tar xzf {} \\; && rm *.tgz && mv metanorma-darwin* metanorma",
     "fetch-dist-deps:linux": "mkdir -p bin/linux && cd bin/linux && curl -fsSL \"https://github.com/metanorma/packed-mn/releases/download/${npm_package_metanorma_version}/metanorma-linux-x86_64.tgz\" -O && find . -name \"*.tgz\" -exec tar xzf {} \\; && rm *.tgz && mv metanorma-linux* metanorma",
     "pack": "electron-builder --dir",
