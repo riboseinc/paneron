@@ -15,6 +15,7 @@ import type { GitAuthor } from 'repositories/types';
 import AuthorForm from '../repositories/AuthorForm';
 import RepoSummary from '../repositories/TooltipSummary';
 
+import { repoMetaDatasets } from '../../../datasets/util';
 
 const RepositorySettings: React.FC<{
   /** Absolute platform-specific filesystem path to repo. */
@@ -150,7 +151,7 @@ const PaneronRepoPanel: React.FC<{ paneronMeta: Repository["paneronMeta"]; }> = 
         {paneronMeta.title}
       </PropertyView>
       <PropertyView label="Datasets">
-        {Object.keys(paneronMeta?.datasets ?? {}).length}
+        {repoMetaDatasets(paneronMeta?.datasets).length}
       </PropertyView>
     </>;
   }

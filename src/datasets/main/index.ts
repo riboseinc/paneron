@@ -26,7 +26,6 @@ import {
   readDatasetMeta,
 } from 'repositories/main/meta';
 
-import { parseMapReduceChain } from '../util';
 import {
   deleteDataset,
   getDatasetInfo,
@@ -45,6 +44,12 @@ import {
   updateSubtree,
   addFromFilesystem,
 } from '../ipc';
+import {
+  parseMapReduceChain,
+  repoMetaDatasetsFound,
+  repoMetaDatasetsShim,
+  repoMetaDatasetsValueShim,
+} from '../util';
 
 import { API as Datasets } from '../types';
 
@@ -115,14 +120,32 @@ initializeDataset.main!.handle(async ({ workingCopyPath, meta: datasetMeta, data
     throw new Error("This repository does not support multiple datasets");
   }
 
-  const newRepoMeta: PaneronRepository = {
-    ...oldRepoMeta,
-    dataset: undefined,
-    datasets: {
-      ...oldRepoMeta.datasets,
-      [datasetPath]: true,
+  const newRepoMeta: PaneronRepository = repoMetaDatasetsValueShim<PaneronRepository>(
+    oldRepoMeta.datasets,
+    (ary: string[]) => {
+      return {
+        ...oldRepoMeta,
+        dataset: undefined,
+        datasets: [...ary, datasetPath],
+      };
     },
-  };
+    (obj: { [x: string]: true; }) => {
+      return {
+        ...oldRepoMeta,
+        dataset: undefined,
+        datasets: {
+          ...obj,
+          [datasetPath]: true,
+        }
+      }
+    },
+    {
+      ...oldRepoMeta,
+      dataset: undefined,
+      datasets: [datasetPath],
+    }
+  );
+
   const repoMetaChange: BufferChange = {
     oldValue: serializeMeta(oldRepoMeta),
     newValue: serializeMeta(newRepoMeta),
@@ -437,7 +460,7 @@ deleteDataset.main!.handle(async ({ workingCopyPath, datasetID }) => {
   }
 
   const repoMeta = await readPaneronRepoMeta(workingCopyPath);
-  if (!repoMeta.datasets?.[datasetID]) {
+  if (!repoMetaDatasetsFound(repoMeta.datasets, datasetID)) {
     throw new Error("Dataset is not found in Paneron repository meta");
   }
 
@@ -457,7 +480,13 @@ deleteDataset.main!.handle(async ({ workingCopyPath, datasetID }) => {
 
   // Update repo meta
   const oldMetaBuffer = serializeMeta(repoMeta);
-  delete repoMeta.datasets[datasetID];
+
+  repoMetaDatasetsShim(
+    repoMeta.datasets,
+    (ary: string[]) => { repoMeta.datasets = ary.filter((e: string) => e === datasetID); },
+    (obj: { [x: string]: true; }) => delete obj[datasetID],
+  )
+
   const newMetaBuffer = serializeMeta(repoMeta);
 
   const datasetMetaPath = joinPaths(datasetID, DATASET_FILENAME);

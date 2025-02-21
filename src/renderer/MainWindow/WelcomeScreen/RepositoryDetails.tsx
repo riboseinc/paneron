@@ -21,6 +21,8 @@ import RepoLabel from './RepoLabel';
 import InitializeDataset from './InitializeDataset';
 import DatasetMenuItem from './DatasetMenuItem';
 
+import { repoMetaDatasets } from '../../../datasets/util';
+
 
 const RepositoryDetails: React.FC<{
   workDir: string;
@@ -197,7 +199,7 @@ const RepoMenu: React.FC<RepoMenuProps> = function ({
   if (repo.paneronMeta && (repo.paneronMeta.datasets || repo.paneronMeta.dataset)) {
 
     const datasetIDs = repo.paneronMeta.datasets
-      ? Object.keys(repo.paneronMeta.datasets)
+      ? repoMetaDatasets(repo.paneronMeta.datasets)
       : [SOLE_DATASET_ID];
 
     return (
