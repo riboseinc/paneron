@@ -28,6 +28,8 @@ import { getRepoWorkers, oneOffWorkerTask } from './workerManager';
 
 import loadedRepositories from './loadedRepositories';
 
+import { repoMetaDatasets } from '../../datasets/util';
+
 import {
   updateRepositories,
   readRepositories,
@@ -318,7 +320,7 @@ repositoriesIPC.listRepositories.main!.handle(async ({ query: { matchesText, sor
       const normalizedTitle = repo.paneronMeta?.title?.toLowerCase();
       const titleMatches = normalizedTitle !== undefined && normalizedTitle.indexOf(normalizedSubstring) >= 0;
 
-      const datasetIDs = (Object.keys(repo.paneronMeta?.datasets ?? {})).join('');
+      const datasetIDs = repoMetaDatasets(repo.paneronMeta?.datasets).join('');
       const datasetIDsMatch = datasetIDs.indexOf(normalizedSubstring) >= 0;
 
       const matches: boolean = workDirMatches || titleMatches || datasetIDsMatch;
@@ -677,7 +679,7 @@ repositoriesIPC.createRepository.main!.handle(async ({ title, author, mainBranch
 
   const paneronMeta: PaneronRepository = {
     title: title ?? "Unnamed repository",
-    datasets: {},
+    datasets: [],
   };
 
   let outcome: CommitOutcome | undefined;

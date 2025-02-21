@@ -12,7 +12,7 @@ export const SOLE_DATASET_ID = '@';
 export type PaneronRepository = {
   title?: string
 } & ({
-  datasets: { [path: string]: true }
+  datasets: string[] | { [path: string]: true }
   dataset?: undefined
 } | {
   datasets?: undefined

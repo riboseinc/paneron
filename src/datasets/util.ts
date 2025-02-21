@@ -73,6 +73,94 @@ export function parseMapReduceChain(
   };
 }
 
+export const isObjectDatasets = (datasets: unknown): datasets is { [path: string]: true } => {
+  return typeof datasets === 'object' && !Array.isArray(datasets);
+};
+
+/**
+ * Act as a facade for the different formats for
+ * 'datasets'
+ *
+ * Given a 'datasets', which can be a string[] or
+ * the original { [path: string]: true },
+ * and two functions that accepts each one,
+ * call the function that corresponds to the type of
+ * 'datasets' and return its result.
+ */
+export const repoMetaDatasetsValueShim = <T>(
+  unknownDatasets: unknown,
+  arrayFn: (ary: string[]) => T,
+  objectFn: (obj: { [path: string]: true }) => T,
+  defaultValue: T,
+  ) => {
+
+  if (Array.isArray(unknownDatasets)) {
+    return arrayFn(unknownDatasets);
+  }
+
+  if (isObjectDatasets(unknownDatasets)) {
+    return objectFn(unknownDatasets);
+  }
+
+  return defaultValue as T;
+};
+
+/**
+ * Act as a facade for the different formats for
+ * 'datasets'
+ *
+ * Given a 'datasets', which can be a string[] or
+ * the original { [path: string]: true },
+ * and two functions that accepts each one,
+ * call the function that corresponds to the type of
+ * 'datasets'.
+ */
+export const repoMetaDatasetsShim = <T>(
+  unknownDatasets: unknown,
+  arrayFn: (ary: string[]) => T,
+  objectFn: (obj: { [path: string]: true }) => T,
+  ) => {
+
+  return repoMetaDatasetsValueShim(
+    unknownDatasets,
+    arrayFn,
+    objectFn,
+    void 0,
+  );
+};
+
+/**
+ * Given 'datasets' and 'datasetId', return true iff
+ * 'datasetId' is in 'datasets'.
+ */
+export const repoMetaDatasetsFound = (
+  unknownDatasets: unknown,
+  datasetId: string,
+  ): boolean => {
+
+  return repoMetaDatasetsValueShim(
+    unknownDatasets,
+    (ary) => ary.includes(datasetId),
+    (obj) => obj[datasetId],
+    false,
+  );
+};
+
+/**
+ * Given 'datasets', return the list of datasetIds within.
+ */
+export const repoMetaDatasets = (
+  unknownDatasets: unknown,
+  ): string[] => {
+
+  return repoMetaDatasetsValueShim(
+    unknownDatasets,
+    (ary) => ary,
+    (obj) => Object.keys(obj),
+    [],
+  );
+};
+
 
 // /**
 //  * Returns `true` if both given objects have identical shape,
