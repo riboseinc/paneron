@@ -30,6 +30,10 @@
       # nix develop
       devShell = pkgs.devshell.mkShell {
         env = [
+          {
+            name = "YARN_IGNORE_NODE";
+            value = "1";
+          }
         ];
         commands = [
           {
