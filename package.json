@@ -9,7 +9,7 @@
     "email": "open.source@ribose.com",
     "url": "https://open.ribose.com"
   },
-  "metanorma_version": "v1.7.3",
+  "metanorma_version": "v1.11.5",
   "repository": "github:paneron/paneron",
   "homepage": "https://github.com/paneron/paneron",
   "license": "MIT",
